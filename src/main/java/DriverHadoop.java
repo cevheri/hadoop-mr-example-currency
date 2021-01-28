@@ -14,8 +14,8 @@ import org.apache.hadoop.mapred.TextOutputFormat;
 public class DriverHadoop {
     public static void main(String[] args)
             throws IOException {
-        String inputFolder = "";
-        String outputFolder = "";
+        String inputFolder = "input";
+        String outputFolder = "output";
         if (args.length == 2) {
             inputFolder = args[0];
             outputFolder = args[1];
