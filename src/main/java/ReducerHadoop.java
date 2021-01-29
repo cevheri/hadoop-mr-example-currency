@@ -1,21 +1,36 @@
 import java.io.IOException;
-import java.util.Iterator;
 
-import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
-import org.apache.hadoop.mapred.MapReduceBase;
-import org.apache.hadoop.mapred.OutputCollector;
-import org.apache.hadoop.mapred.Reducer;
-import org.apache.hadoop.mapred.Reporter;
+import org.apache.hadoop.mapreduce.Reducer;
 
 public class ReducerHadoop
-        extends MapReduceBase implements Reducer<Text, IntWritable, Text, IntWritable> {
-    public void reduce(Text key, Iterator<IntWritable> values, OutputCollector<Text, IntWritable> output,
-                       Reporter reporter) throws IOException {
-        int sum = 0;
-        while (values.hasNext()) {
-            sum += values.next().get();
+        extends Reducer<Text, MinMaxDuration, Text, MinMaxDuration> {
+
+    private final MinMaxDuration resultRow = new MinMaxDuration();
+
+    public void reduce(Text key, Iterable<MinMaxDuration> values,
+                       Context context
+    ) throws IOException, InterruptedException {
+        Double minVal = (double) 0;
+        Double maxVal = (double) 0;
+
+        resultRow.setMinVal(null);
+        resultRow.setMaxVal(null);
+
+        for (MinMaxDuration val : values) {
+
+            minVal = val.getMinVal();
+            maxVal = val.getMaxVal();
+            // get min score
+
+            if (resultRow.getMinVal() == null || minVal.compareTo(resultRow.getMinVal()) < 0) {
+                resultRow.setMinVal(minVal);
+            }            // get min bonus
+            if (resultRow.getMaxVal() == null || maxVal.compareTo(resultRow.getMaxVal()) > 0) {
+                resultRow.setMaxVal(maxVal);
+            }
         }
-        output.collect(key, new IntWritable(sum));
+
+        context.write(key, resultRow);
     }
 }

@@ -1,27 +1,29 @@
 import java.io.IOException;
-import java.util.StringTokenizer;
 
-import org.apache.hadoop.io.IntWritable;
-import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
-import org.apache.hadoop.mapred.MapReduceBase;
-import org.apache.hadoop.mapred.Mapper;
-import org.apache.hadoop.mapred.OutputCollector;
-import org.apache.hadoop.mapred.Reporter;
+import org.apache.hadoop.mapreduce.Mapper;
 
 public class MapperHadoop
-        extends MapReduceBase implements Mapper<LongWritable, Text, Text, IntWritable> {
-    private final static IntWritable one = new IntWritable(1);
-    private Text word = new Text();
+        extends Mapper<Object, Text, Text, MinMaxDuration> {
 
-    public void map(LongWritable key, Text value, OutputCollector<Text, IntWritable> output,
-                    Reporter reporter) throws IOException {
-        String line = value.toString();
-        StringTokenizer tokenizer = new StringTokenizer(line);
-        while (tokenizer.hasMoreTokens()) {
-            word.set(tokenizer.nextToken());
-            output.collect(word, one);
+    private Text year = new Text();
+    private MinMaxDuration outPut = new MinMaxDuration();
+
+    public void map(Object key, Text value, Context context
+    ) throws IOException, InterruptedException {
+
+        String[] line = value.toString().split(",");
+        year.set(line[0].substring(6, 10));
+        Double minVal = Double.parseDouble(line[1].substring(6, 13));
+        Double maxVal = Double.parseDouble(line[1].substring(6, 13));
+
+        try {
+            outPut.setMinVal(minVal);
+            outPut.setMaxVal(maxVal);
+            context.write(year, outPut);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
     }
-
 }
