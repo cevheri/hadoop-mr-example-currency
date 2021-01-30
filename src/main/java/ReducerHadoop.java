@@ -4,11 +4,11 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 
 public class ReducerHadoop
-        extends Reducer<Text, MinMaxDuration, Text, MinMaxDuration> {
+        extends Reducer<Text, MinMaxValue, Text, MinMaxValue> {
 
-    private final MinMaxDuration resultRow = new MinMaxDuration();
+    private final MinMaxValue resultRow = new MinMaxValue();
 
-    public void reduce(Text key, Iterable<MinMaxDuration> values,
+    public void reduce(Text key, Iterable<MinMaxValue> values,
                        Context context
     ) throws IOException, InterruptedException {
         Double minVal = (double) 0;
@@ -17,7 +17,7 @@ public class ReducerHadoop
         resultRow.setMinVal(null);
         resultRow.setMaxVal(null);
 
-        for (MinMaxDuration val : values) {
+        for (MinMaxValue val : values) {
 
             minVal = val.getMinVal();
             maxVal = val.getMaxVal();

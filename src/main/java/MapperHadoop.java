@@ -4,10 +4,10 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
 public class MapperHadoop
-        extends Mapper<Object, Text, Text, MinMaxDuration> {
+        extends Mapper<Object, Text, Text, MinMaxValue> {
 
     private Text year = new Text();
-    private MinMaxDuration outPut = new MinMaxDuration();
+    private MinMaxValue outPut = new MinMaxValue();
 
     public void map(Object key, Text value, Context context
     ) throws IOException, InterruptedException {

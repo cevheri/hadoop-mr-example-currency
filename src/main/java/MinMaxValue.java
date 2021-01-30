@@ -3,11 +3,11 @@ import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
 
-public class MinMaxDuration
+public class MinMaxValue
         implements Writable {
     private Double minVal;
     private Double maxVal;
-    public MinMaxDuration(){
+    public MinMaxValue(){
         minVal= Double.valueOf(0);
         maxVal= Double.valueOf(0);
     }

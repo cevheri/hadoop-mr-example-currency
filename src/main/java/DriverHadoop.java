@@ -26,7 +26,7 @@ public class DriverHadoop {
         job.setCombinerClass(ReducerHadoop.class);
         job.setReducerClass(ReducerHadoop.class);
         job.setOutputKeyClass(Text.class);
-        job.setOutputValueClass(MinMaxDuration.class);
+        job.setOutputValueClass(MinMaxValue.class);
         FileInputFormat.addInputPath(job, new Path(inputFolder));
         FileOutputFormat.setOutputPath(job, new Path(outputFolder));
         System.exit(job.waitForCompletion(true) ? 0 : 1);
