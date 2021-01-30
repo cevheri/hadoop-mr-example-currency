@@ -14,8 +14,8 @@ public class MapperHadoop
 
         String[] line = value.toString().split(",");
         year.set(line[0].substring(6, 10));
-        Double minVal = Double.parseDouble(line[1].substring(6, 13));
-        Double maxVal = Double.parseDouble(line[1].substring(6, 13));
+        Double minVal = Double.parseDouble(line[1].trim());
+        Double maxVal = Double.parseDouble(line[1].trim());
 
         try {
             outPut.setMinVal(minVal);
