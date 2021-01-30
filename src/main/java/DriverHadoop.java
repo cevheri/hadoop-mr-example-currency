@@ -12,8 +12,8 @@ public class DriverHadoop {
     public static void main(String[] args)
             throws IOException, ClassNotFoundException, InterruptedException {
 
-        String inputFolder = "input";
-        String outputFolder = "output";
+        String inputFolder = "hdfs://localhost:9000/user/cevher/input";
+        String outputFolder = "hdfs://localhost:9000/user/cevher/output";
         if (args.length == 2) {
             inputFolder = args[0];
             outputFolder = args[1];
