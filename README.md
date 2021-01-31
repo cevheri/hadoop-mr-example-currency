@@ -14,3 +14,26 @@ The major advantage of MapReduce is that it is easy to scale data processing ove
 
 output: 
 ![img_1.png](images/img_1.png)
+
+## run example in linux 
+
+$ cd hdfs/
+$ ls
+$ rm -rf datanode namenode
+$ ls
+$ hdfs namenode -format
+$ start-dfs.sh
+$ jps
+$ ls -hal
+$ hdfs dfs -ls /
+$ hdfs dfs -mkdir /user
+$ hdfs dfs -mkdir /user/cevher
+$ hdfs dfs -mkdir /user/cevher/input
+$ hdfs dfs -put /home/cevher/Downloads/doviz.txt /user/cevher/input
+$ hdfs dfs -ls /
+$ hdfs dfs -ls /user/cevher/input
+$ netstat -nlp | grep 9000
+$ hdfs dfs -ls /user/cevher
+$ hdfs dfs -ls /user/cevher/output
+$ hdfs dfs -cat /user/cevher/output/
+$ hdfs dfs -cat /user/cevher/output/part-r-00000
