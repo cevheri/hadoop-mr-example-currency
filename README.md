@@ -37,3 +37,11 @@ $ hdfs dfs -ls /user/cevher
 $ hdfs dfs -ls /user/cevher/output
 $ hdfs dfs -cat /user/cevher/output/
 $ hdfs dfs -cat /user/cevher/output/part-r-00000
+
+
+### important for running :
+* hdfs dfs start-dfs.sh
+* hdfs dfs start-yarn.sh 
+* mvn clean package
+* hdfs dfs -rm -r /user/cevher/output*
+* yarn jar /home/cevher/projects/hadoop-mr-example-currency/target/hadoop-mapreduce-1.0-SNAPSHOT.jar DriverHadoop
