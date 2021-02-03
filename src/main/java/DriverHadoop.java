@@ -1,7 +1,9 @@
 
 import java.io.IOException;
+
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.io.DoubleWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
@@ -32,7 +34,7 @@ public class DriverHadoop {
         job.setCombinerClass(ReducerHadoop.class);
         job.setReducerClass(ReducerHadoop.class);
         job.setOutputKeyClass(Text.class);
-        job.setOutputValueClass(MinMaxValue.class);
+        job.setOutputValueClass(DoubleWritable.class);
         FileInputFormat.addInputPath(job, new Path(inputFolder));
         FileOutputFormat.setOutputPath(job, new Path(outputFolder));
         System.exit(job.waitForCompletion(true) ? 0 : 1);
